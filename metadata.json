@@ -1,0 +1,5 @@
+{
+  "name": "BIM IFC 3D Viewer",
+  "description": "A powerful web application to upload, view, and interact with Building Information Model (BIM) files in the .IFC format. Built with React, Three.js, and IFC.js.",
+  "requestFramePermissions": []
+}
