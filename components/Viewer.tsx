@@ -5,6 +5,19 @@ import { Canvas, ThreeEvent, useThree } from '@react-three/fiber';
 import { OrbitControls, Grid } from '@react-three/drei';
 import * as THREE from 'three';
 
+// FIX: Augment JSX namespace to include react-three-fiber elements.
+// This is a workaround for when TypeScript doesn't automatically pick up the types from the library,
+// which can happen with certain project configurations.
+declare global {
+    namespace JSX {
+        interface IntrinsicElements {
+            ambientLight: any;
+            directionalLight: any;
+            primitive: any;
+        }
+    }
+}
+
 interface ViewerProps {
   model: any | null;
   ifcManager: any | null;

@@ -27,7 +27,11 @@ const BLINK_SUBSET_ID = 'blink-subset';
 
 // Extend IFCLoader to add custom methods for better state management
 class ExtendedIfcLoader extends IFCLoader {
-  
+  // FIX: Explicitly declare properties from the base IFCLoader class
+  // to resolve TypeScript type inference issues where it fails to see inherited members.
+  public ifcManager: any;
+  public loadAsync: (url: string) => Promise<THREE.Group>;
+
   private blinkTimeout: ReturnType<typeof setTimeout> | null = null;
 
   setPersistentHighlight(expressID: number) {
@@ -125,7 +129,7 @@ export const useIfcLoader = () => {
       try {
         const loader = new ExtendedIfcLoader();
         // Set up the IFC manager with the correct WASM path from the same CDN
-        await loader.ifcManager.setWasmPath('https://aistudiocdn.com/web-ifc@0.0.71/');
+        await loader.ifcManager.setWasmPath('https://unpkg.com/web-ifc@0.0.55/');
         // FIX: The .init() method does not exist on the IfcAPI from web-ifc.
         // It's part of web-ifc-viewer, which is not being used here. Initialization is handled by the loader.
         setIfcLoader(loader);
